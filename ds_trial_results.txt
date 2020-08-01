@@ -1,0 +1,67 @@
+=== creating mass functions ===
+m_1 = {{'b', 'a'}:0.6; {'c', 'b'}:0.3; {'a'}:0.1; {'d', 'a'}:0.0}
+m_2 = {{'c', 'a'}:0.5; {'c'}:0.3; {'c', 'b', 'a'}:0.2}
+m_3 = {{'c', 'b'}:0.8; set():0.2} (unnormalized mass function)
+
+=== belief, plausibility, and commonality ===
+bel_1({a, b}) = 0.7
+pl_1({a, b}) = 1.0
+q_1({a, b}) = 0.6
+bel_1 = {frozenset(): 0.0, frozenset({'c'}): 0.0, frozenset({'b'}): 0.0, frozenset({'a'}): 0.1, frozenset({'c', 'b'}): 0.3, frozenset({'c', 'a'}): 0.1, frozenset({'a', 'b'}): 0.7, frozenset({'c', 'a', 
+'b'}): 1.0}
+bel_3 = {frozenset(): 0.0, frozenset({'c'}): 0.0, frozenset({'b'}): 0.0, frozenset({'c', 'b'}): 0.8}
+m_3 from bel_3 = {{'c', 'b'}:0.8; set():0.19999999999999996}
+
+=== frame of discernment, focal sets, and core  ===
+frame of discernment of m_1 = frozenset({'c', 'd', 'b', 'a'})
+focal sets of m_1 = {frozenset({'b', 'a'}), frozenset({'c', 'b'}), frozenset({'a'})}
+core of m_1 = frozenset({'c', 'b', 'a'})
+combined core of m_1 and m_3 = frozenset({'c', 'b'})
+
+=== Dempster's combination rule, unnormalized conjunctive combination (exact and approximate) ===
+Dempster's combination rule for m_1 and m_2 = {{'a'}:0.46835443037974683; {'c'}:0.30379746835443033; {'a', 'b'}:0.15189873417721517; {'c', 'b'}:0.07594936708860758}
+Dempster's combination rule for m_1 and m_2 (Monte-Carlo, importance sampling) = {{'a'}:0.46873417721518723; {'c'}:0.3037974683544316; {'a', 'b'}:0.1515189873417732; {'c', 'b'}:0.0759493670886079}
+Dempster's combination rule for m_1, m_2, and m_3 = {{'a'}:0.46835443037974683; {'c'}:0.30379746835443033; {'a', 'b'}:0.15189873417721517; {'c', 'b'}:0.07594936708860758}
+unnormalized conjunctive combination of m_1 and m_2 = {{'a'}:0.37; {'c'}:0.24; set():0.21; {'a', 'b'}:0.12; {'c', 'b'}:0.06}
+unnormalized conjunctive combination of m_1 and m_2 (Monte-Carlo) = {{'a'}:0.3750000000000003; {'c'}:0.23300000000000018; set():0.21600000000000016; {'a', 'b'}:0.10900000000000008; {'c', 'b'}:0.06700000000000005}
+unnormalized conjunctive combination of m_1, m_2, and m_3 = {set():0.6640000000000001; {'c'}:0.192; {'b'}:0.096; {'c', 'b'}:0.048}
+
+=== normalized and unnormalized conditioning ===
+normalized conditioning of m_1 with {a, b} = {{'a', 'b'}:0.6; {'b'}:0.3; {'a'}:0.1}
+unnormalized conditioning of m_1 with {b, c} = {{'b'}:0.6; {'c', 'b'}:0.3; set():0.1}
+
+=== disjunctive combination rule (exact and approximate) ===
+disjunctive combination of m_1 and m_2 = {{'c', 'a', 'b'}:0.83; {'c', 'b'}:0.09; {'c', 'a'}:0.08; {'c', 'a', 'd', 'b'}:0.0; {'c', 'd', 'a'}:0.0}
+disjunctive combination of m_1 and m_2 (Monte-Carlo) = {{'c', 'b', 'a'}:0.8270000000000006; {'c', 'b'}:0.09000000000000007; {'c', 'a'}:0.08300000000000006}
+disjunctive combination of m_1, m_2, and m_3 = {{'c', 'a', 'b'}:0.8940000000000001; {'c', 'b'}:0.09; {'c', 'a'}:0.016; {'c', 'a', 'd', 'b'}:0.0; {'c', 'd', 'a'}:0.0}
+
+=== weight of conflict ===
+weight of conflict between m_1 and m_2 = 0.23572233352106983
+weight of conflict between m_1 and m_2 (Monte-Carlo) = 0.23067181773500156
+weight of conflict between m_1, m_2, and m_3 = 1.0906441190189333
+
+=== pignistic transformation ===
+pignistic transformation of m_1 = {{'b'}:0.44999999999999996; {'a'}:0.4; {'c'}:0.15}
+pignistic transformation of m_2 = {{'c'}:0.6166666666666667; {'a'}:0.31666666666666665; {'b'}:0.06666666666666667}
+pignistic transformation of m_3 = {{'c'}:0.5; {'b'}:0.5}
+
+=== local conflict uncertainty measure ===
+local conflict of m_1 = 2.195461844238322
+entropy of the pignistic transformation of m_3 = 1.0
+
+=== sampling ===
+random samples drawn from m_1 = [frozenset({'c', 'b'}), frozenset({'b', 'a'}), frozenset({'c', 'b'}), frozenset({'a'}), frozenset({'b', 'a'})]
+sample frequencies of m_1 = {frozenset({'b', 'a'}): 580, frozenset({'c', 'b'}): 317, frozenset({'a'}): 103, frozenset({'d', 'a'}): 0}
+quantization of m_1 = {frozenset({'b', 'a'}): 600, frozenset({'c', 'b'}): 300, frozenset({'a'}): 100, frozenset({'d', 'a'}): 0}
+
+=== map: vacuous extension and projection ===
+vacuous extension of m_1 to {1, 2} = {{('a', 1), ('a', 2), ('b', 2), ('b', 1)}:0.6; {('c', 2), ('c', 1), ('b', 2), ('b', 1)}:0.3; {('a', 1), ('a', 2)}:0.1; {('d', 2), ('a', 1), ('d', 1), ('a', 2)}:0.0}
+project m_1 back to its original frame = {{'b', 'a'}:0.6; {'c', 'b'}:0.3; {'a'}:0.1; {'d', 'a'}:0.0}
+
+=== construct belief from data ===
+histogram: {'a': 2, 'b': 0, 'c': 1}
+maximum likelihood: {{'a'}:0.6666666666666666; {'c'}:0.3333333333333333; {'b'}:0.0}
+Laplace smoothing: {{'a'}:0.5; {'c'}:0.3333333333333333; {'b'}:0.16666666666666666}
+IDM: {{'a'}:0.5; {'c', 'b', 'a'}:0.25; {'c'}:0.25; {'b'}:0.0}
+MaxBel: {{'c', 'b', 'a'}:0.6564022284920252; {'a'}:0.15998100336031204; {'c', 'a'}:0.13816835529000887; {'c'}:0.04544841285765386; {'b'}:2.220446049250313e-16; set():1.249000902703301e-16; {'b', 'a'}:8.326672684688674e-17}
+MCD: {{'c', 'b', 'a'}:0.9999999999999998; {'a'}:2.220446049250313e-16; {'b', 'a'}:0.0}
