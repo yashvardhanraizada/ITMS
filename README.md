@@ -1,4 +1,4 @@
 # ITMS
 Intelligent Traffic Management Systems
 
-Automatic Incident Detection (AID) Algorithms, Data Analysis Scripts, Deep Learning Models &amp; others
+Automatic Incident Detection (AID) Algorithms, Data Analysis Scripts, Dempster Shafer Probability Models &amp; others
